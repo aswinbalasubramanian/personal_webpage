@@ -89,24 +89,6 @@ body {
 
 .widget-header h3,
 .widget-header .drag-handle {
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.widget-content {
-    padding: 1.25rem;
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Resize Handle */
-.resize-handle {
-    display: none;
-    position: absolute;
     bottom: 0;
     right: 0;
     width: 20px;
@@ -131,45 +113,6 @@ body.edit-mode .resize-handle {
 }
 
 body.edit-mode .glass-panel {
-    border-radius: 0 0 16px 16px;
-    /* Adjust radius when header is visible */
-}
-
-/* Specific Widgets */
-
-/* Main Clock */
-#widget-main-clock {
-    /* Centering handled by JS init if no saved pos */
-    align-items: center;
-    justify-content: center;
-    border: none;
-    /* No border for main clock unless edit mode */
-}
-
-body.edit-mode #widget-main-clock {
-    border: 1px dashed var(--accent-edit);
-}
-
-.main-clock-container h1 {
-    font-size: 8rem;
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -2px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    white-space: nowrap;
-}
-
-.date-display {
-    font-size: 1.5rem;
-    font-weight: 400;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
-}
-
-/* World Clocks */
-.secondary-clocks {
-    display: flex;
-    align-items: center;
     gap: 1.5rem;
     justify-content: center;
     height: 100%;

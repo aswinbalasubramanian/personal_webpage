@@ -87,6 +87,9 @@ function loadLayout() {
             }
         }
     });
+
+    // Initialize ResizeObserver
+    initResizeObserver();
 }
 
 function saveLayout() {
@@ -102,13 +105,43 @@ function saveLayout() {
     localStorage.setItem('dashboardLayout', JSON.stringify(layout));
 }
 
+// --- Resize Logic ---
+
+function initResizeObserver() {
+    const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            if (entry.target.id === 'widget-main-clock') {
+                scaleMainClock(entry.target);
+            }
+        }
+    });
+
+    els.widgets.forEach(widget => resizeObserver.observe(widget));
+}
+
+function scaleMainClock(container) {
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    // Heuristic: Font size is roughly 1/4th of width, but constrained by height
+    let fontSize = Math.min(width / 4, height / 1.5);
+
+    // Clamp min/max
+    fontSize = Math.max(20, Math.min(fontSize, 200));
+
+    const clockText = container.querySelector('h1');
+    const dateText = container.querySelector('.date-display');
+
+    if (clockText) clockText.style.fontSize = `${fontSize}px`;
+    if (dateText) dateText.style.fontSize = `${fontSize * 0.2}px`;
+}
+
 // --- Interaction (Drag & Resize) ---
 
 els.editBtn.addEventListener('click', () => {
     isEditMode = !isEditMode;
     els.body.classList.toggle('edit-mode', isEditMode);
 
-    // Reset transforms when entering edit mode to make absolute positioning easier to calculate
     if (isEditMode) {
         els.widgets.forEach(w => {
             const rect = w.getBoundingClientRect();
