@@ -1,0 +1,310 @@
+:root {
+    --font-main: 'Outfit', sans-serif;
+    --font-mono: 'Space Grotesk', monospace;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --glass-bg: rgba(0, 0, 0, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-gold: #fbbf24;
+    --accent-edit: #38bdf8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-primary);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    background-color: #000;
+}
+
+/* Background */
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2874&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Dashboard Area */
+#dashboard-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* Widgets Common */
+.widget {
+    position: absolute;
+    min-width: 150px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.widget-header {
+    display: none;
+    /* Hidden by default, shown in edit mode */
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--glass-border);
+    border-radius: 16px 16px 0 0;
+    cursor: grab;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.widget-header h3,
+.widget-header .drag-handle {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.widget-content {
+    padding: 1.25rem;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Resize Handle */
+.resize-handle {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: se-resize;
+    background: linear-gradient(135deg, transparent 50%, var(--accent-edit) 50%);
+    border-radius: 0 0 16px 0;
+}
+
+/* Edit Mode Styles */
+body.edit-mode .widget {
+    border: 1px dashed var(--accent-edit);
+    background: rgba(0, 0, 0, 0.6);
+}
+
+body.edit-mode .widget-header {
+    display: flex;
+}
+
+body.edit-mode .resize-handle {
+    display: block;
+}
+
+body.edit-mode .glass-panel {
+    border-radius: 0 0 16px 16px;
+    /* Adjust radius when header is visible */
+}
+
+/* Specific Widgets */
+
+/* Main Clock */
+#widget-main-clock {
+    /* Centering handled by JS init if no saved pos */
+    align-items: center;
+    justify-content: center;
+    border: none;
+    /* No border for main clock unless edit mode */
+}
+
+body.edit-mode #widget-main-clock {
+    border: 1px dashed var(--accent-edit);
+}
+
+.main-clock-container h1 {
+    font-size: 8rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -2px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+.date-display {
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* World Clocks */
+.secondary-clocks {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-content: center;
+    height: 100%;
+}
+
+.mini-clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mini-time {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.mini-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.divider {
+    width: 1px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Gold Widget */
+.gold-tabs {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 2px;
+    margin-bottom: 1rem;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-weight: 500;
+}
+
+.gold-content {
+    display: none;
+}
+
+.gold-content.active {
+    display: block;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.9rem;
+}
+
+.price-row span:last-child {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--accent-gold);
+}
+
+/* Notes Widget */
+#notesInput {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    resize: none;
+    outline: none;
+}
+
+#notesInput::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Edit Toggle Button */
+.edit-toggle-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-toggle-btn:hover,
+body.edit-mode .edit-toggle-btn {
+    background: var(--accent-edit);
+    color: #000;
+    transform: rotate(90deg);
+}
+
+/* Photo Credit */
+.photo-credit {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-clock-container h1 {
+        font-size: 4rem;
+    }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Time & Gold</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard | Time & Gold</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+<body>
+    <!-- Background Image -->
+    <div class="background-image" id="bgImage"></div>
+    <div class="overlay"></div>
+
+    <!-- Edit Toggle -->
+    <button id="editToggle" class="edit-toggle-btn" title="Toggle Edit Mode">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+        </svg>
+    </button>
+
+    <!-- Widget Container (Full Screen) -->
+    <div id="dashboard-area">
+
+        <!-- Widget: Main Clock -->
+        <div class="widget" id="widget-main-clock" data-x="center" data-y="center">
+            <div class="widget-header">
+                <span class="drag-handle">Main Clock</span>
+            </div>
+            <div class="widget-content center-content">
+                <div class="main-clock-container">
+                    <h1 id="mainClock">--:--</h1>
+                    <p id="mainDate" class="date-display">Loading...</p>
+                </div>
+            </div>
+            <div class="resize-handle"></div>
+        </div>
+
+        <!-- Widget: World Clocks -->
+        <div class="widget glass-panel" id="widget-world-clocks" data-x="center" data-y="60%">
+            <div class="widget-header">
+                <span class="drag-handle">World Time</span>
+            </div>
+            <div class="widget-content">
+                <div class="secondary-clocks">
+                    <div class="mini-clock">
+                        <span class="mini-time" id="clock-france">--:--</span>
+                        <span class="mini-label">Paris</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="mini-clock">
+                        <span class="mini-time" id="clock-usa">--:--</span>
+                        <span class="mini-label">New York</span>
+                    </div>
+                </div>
+            </div>
+            <div class="resize-handle"></div>
+        </div>
+
+        <!-- Widget: Gold Rates -->
+        <div class="widget glass-panel" id="widget-gold" data-x="80%" data-y="10%">
+            <div class="widget-header">
+                <span class="drag-handle">Gold Rates</span>
+                <span id="goldLastUpdated" class="refresh-time">Updating...</span>
+            </div>
+            <div class="widget-content">
+                <div class="gold-tabs">
+                    <button class="tab-btn active" onclick="switchTab('22k')">22K</button>
+                    <button class="tab-btn" onclick="switchTab('24k')">24K</button>
+                </div>
+
+                <div class="gold-content active" id="tab-22k">
+                    <div class="price-row">
+                        <span>1g</span>
+                        <span id="gold-22-1g">...</span>
+                    </div>
+                    <div class="price-row">
+                        <span>8g</span>
+                        <span id="gold-22-8g">...</span>
+                    </div>
+                    <div class="price-row">
+                        <span>10g</span>
+                        <span id="gold-22-10g">...</span>
+                    </div>
+                </div>
+
+                <div class="gold-content" id="tab-24k">
+                    <div class="price-row">
+                        <span>1g</span>
+                        <span id="gold-24-1g">...</span>
+                    </div>
+                    <div class="price-row">
+                        <span>8g</span>
+                        <span id="gold-24-8g">...</span>
+                    </div>
+                    <div class="price-row">
+                        <span>10g</span>
+                        <span id="gold-24-10g">...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="resize-handle"></div>
+        </div>
+
+        <!-- Widget: Notes -->
+        <div class="widget glass-panel" id="widget-notes" data-x="10%" data-y="10%">
+            <div class="widget-header">
+                <span class="drag-handle">Notes</span>
+            </div>
+            <div class="widget-content">
+                <textarea id="notesInput" placeholder="Type your notes here..."></textarea>
+            </div>
+            <div class="resize-handle"></div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Left: Photo Credit -->
+    <div class="photo-credit">
+        <p>Photo by Unsplash</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
